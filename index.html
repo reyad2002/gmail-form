@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* margin-top: 20px; */
+      }
+      .container {
+        border-radius: 20px;
+        background-color: rgb(202, 224, 189);
+        color: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: column;
+        padding: 10px ;
+        /* min-height: 100vh; */
+        row-gap: 20px;
+      }
+      .form-container {
+        background-color: rgb(248, 248, 248);
+        padding: 25px;
+        border-radius: 20px;
+      }
+      #contactForm {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+      }
+      .contact-info {
+        padding: 25px;
+        border-radius: 20px;
+        background-color: #003508;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        color: aliceblue;
+      }
+      #contactForm input , textarea ,button {
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #003508;
+        color: aliceblue;
+      }
+      #contactForm button{
+        background-color: #00aa09;
+        cursor: pointer;
+        transition: all .5s;
+      }
+      #contactForm button:hover{
+        background-color: #00aa09;
+        cursor: pointer;
+        opacity: .8;
+      }
+      /* Media Queries for responsiveness */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="contact-info">
+        <h4>GET IN TOUCH</h4>
+        <h3>Contact Us</h3>
+        <p>
+          Have questions? We’d love to hear from you. Send us a message and
+          we’ll respond as soon as possible.
+        </p>
+        <div>
+          <strong>Location</strong><br />
+          The Red Sea, Hurghada, Arabia
+        </div>
+        <div>
+          <strong>Phone</strong><br />
+          +201003472237
+        </div>
+        <div>
+          <strong>Email</strong><br />
+          reyadmohamed631@gmail.com
+        </div>
+      </div>
+      <div class="form-container">
+        <form id="contactForm">
+          <input
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            class="in"
+            required
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Your Email"
+            class="in"
+            required
+          />
+          <input
+            type="text"
+            id="subject"
+            placeholder="Subject"
+            class="in"
+            required
+          />
+          <textarea
+            id="message"
+            placeholder="Your Message"
+            rows="5"
+            required
+          ></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- إضافة مكتبة EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("N1D6Kn-D5jgaebneo");
+      })();
+
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const subject = document.getElementById("subject").value;
+          const message = document.getElementById("message").value;
+
+          emailjs
+            .send("service_n2mby2c", "template_hikpm1c", {
+              name: name,
+              email: email,
+              subject: subject,
+              message: message,
+            })
+            .then(
+              function (response) {
+                // alert('Message sent successfully to reyadmohamed631@gmail.com!');
+                Swal.fire({
+                  title: "Drag me!",
+                  icon: "success",
+                  draggable: true,
+                });
+                document.getElementById("contactForm").reset();
+              },
+              function (error) {
+                alert("Failed to send message: " + error.text);
+              }
+            );
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
